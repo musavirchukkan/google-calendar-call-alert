@@ -31,7 +31,7 @@ This application allows users to authenticate with their Google account, access 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/google-calendar-call-alert.git
+git clone [https://github.com/yourusername/google-calendar-call-alert.git](https://github.com/musavirchukkan/google-calendar-call-alert.git)
 cd google-calendar-call-alert
 ```
 
