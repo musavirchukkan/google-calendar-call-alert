@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken';
 // @route   GET /api/auth/me
 // @access  Private
 export const getCurrentUser = async (req, res) => {
-  const user = await User.findById(req.user.id).select('-tokens.refreshToken');
+  const user = await User.findById(req.user.id);
   
   if (!user) {
     return res.status(StatusCodes.NOT_FOUND).json({ 

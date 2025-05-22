@@ -85,15 +85,18 @@ userSchema.methods.generateAuthToken = function() {
 
 // Check if Google Calendar is connected
 userSchema.methods.isCalendarConnected = function() {
-  return this.calendarEnabled && 
-         this.tokens.accessToken && 
-         this.tokens.refreshToken && 
-         this.tokens.tokenExpiry > new Date();
+  return !!(
+    this.calendarEnabled &&
+    this.tokens.accessToken &&
+    this.tokens.refreshToken &&
+    this.tokens.tokenExpiry &&
+    new Date(this.tokens.tokenExpiry) > new Date()
+  );
 };
 
 // Check if Twilio is configured
 userSchema.methods.isTwilioConfigured = function() {
-  return this.twilioEnabled && this.phoneNumber;
+  return !!(this.twilioEnabled && this.phoneNumber);
 };
 
 // Pre-save middleware
