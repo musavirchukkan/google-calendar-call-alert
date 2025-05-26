@@ -66,7 +66,7 @@ export const refreshTokenIfNeeded = async (user) => {
   }
 };
 
-// Get upcoming events in the next 5 minutes
+// Get upcoming events that start between 5 and 10 minutes from now
 export const getUpcomingEvents = async (user) => {
   try {
     // Refresh token if needed
@@ -75,15 +75,16 @@ export const getUpcomingEvents = async (user) => {
     // Create calendar client
     const calendar = createCalendarClient(refreshedUser);
     
-    // Calculate time range (now to 5 minutes from now)
+    // Calculate time range (5 minutes from now to 10 minutes from now)
     const now = new Date();
     const fiveMinutesFromNow = new Date(now.getTime() + 5 * 60 * 1000);
+    const tenMinutesFromNow = new Date(now.getTime() + 10 * 60 * 1000);
     
     // List events
     const response = await calendar.events.list({
       calendarId: 'primary',
-      timeMin: now.toISOString(),
-      timeMax: fiveMinutesFromNow.toISOString(),
+      timeMin: fiveMinutesFromNow.toISOString(),
+      timeMax: tenMinutesFromNow.toISOString(),
       singleEvents: true,
       orderBy: 'startTime'
     });
